@@ -1,89 +1,96 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { withStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
-import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import HomeIcon from '@material-ui/icons/Home';
-import PeopleIcon from '@material-ui/icons/People';
-import DnsRoundedIcon from '@material-ui/icons/DnsRounded';
-import PermMediaOutlinedIcon from '@material-ui/icons/PhotoSizeSelectActual';
-import PublicIcon from '@material-ui/icons/Public';
-import SettingsEthernetIcon from '@material-ui/icons/SettingsEthernet';
-import SettingsInputComponentIcon from '@material-ui/icons/SettingsInputComponent';
-import TimerIcon from '@material-ui/icons/Timer';
-import SettingsIcon from '@material-ui/icons/Settings';
 import PhonelinkSetupIcon from '@material-ui/icons/PhonelinkSetup';
-import './CSS/Header.css'
+import '../Header/Header.css'
+import './SideBar.css'
+import { Link } from 'react-router-dom';
+
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import AssignmentIcon from '@material-ui/icons/Assignment';
+import AppsIcon from '@material-ui/icons/Apps';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import ChromeReaderModeIcon from '@material-ui/icons/ChromeReaderMode';
+import CastForEducationIcon from '@material-ui/icons/CastForEducation';
+import EqualizerIcon from '@material-ui/icons/Equalizer';
+import TableChartIcon from '@material-ui/icons/TableChart';
 
 
 const SideBar = (props) => {
 
     const categories = [
         {
-          id: 'Develop',
+          id: 'Information',
           children: [
-            {
-              id: 'Authentication',
-              icon: <PeopleIcon />,
-              active: true,
-            },
-            { id: 'Database', icon: <DnsRoundedIcon /> },
-            { id: 'Storage', icon: <PermMediaOutlinedIcon /> },
-            { id: 'Hosting', icon: <PublicIcon /> },
-            { id: 'Functions', icon: <SettingsEthernetIcon /> },
-            {
-              id: 'ML Kit',
-              icon: <SettingsInputComponentIcon />,
-            },
+            {id: 'Module', icon: <ChromeReaderModeIcon />, active: true, link:"/module"},
+            { id: 'Assesments', icon: <AssignmentIcon />, link:"/assesments" },
+            { id: 'POs', icon: <AppsIcon /> , link:"/poslist"},
+            { id: 'LOs', icon: <DashboardIcon /> , link:"/loslist"},
+            { id: 'CA Marks', icon: <CastForEducationIcon /> , link:"/camarks"},
+
+            // {
+            //   id: 'Information',
+            //   icon: <SettingsInputComponentIcon />,
+            // },
           ],
         },
         {
-          id: 'Quality',
+          id: 'Reports',
           children: [
-            { id: 'Analytics', icon: <SettingsIcon /> },
-            { id: 'Performance', icon: <TimerIcon /> },
-            { id: 'Test Lab', icon: <PhonelinkSetupIcon /> },
+            { id: 'Normalize', icon: <TableChartIcon />, link:"/normalize" },
+            { id: 'Analysis', icon: <EqualizerIcon />, link:"/analysis" },
+            { id: 'Test Lab', icon: <PhonelinkSetupIcon />, link:"/" },
           ],
         },
       ];
    
   
     return (
-      <Drawer variant="permanent" >
+
+      <div className="sidebar__main">
+           
         <List disabePadding>
 
-          <ListItem className="firebase, item, itemCategory">
+          <ListItem style={{marginBottom: "30px"}} className="firebase, item, itemCategory">
               <div className="sidebar__logo">
-                    <img style={{height:"150px", marginLeft:"25px"}} src="https://www.entiretest.com/wp-content/uploads/2011/12/University-of-Ruhuna-Logo.png" alt=""/>
+                    <img style={{height:"150px", marginLeft:"25px"}} src="https://lh3.googleusercontent.com/proxy/pkhCWzB0-b_XB42uW2HnuVUygV3OEqK0rvQ9HLWK6eru2oAbqWyblIFCOti_WpnWLjt58NgZnEvATIbavjdwag" alt=""/>
               </div>
           </ListItem>
 
-          <ListItem className="item, itemCategory">
+          {/* <ListItem className="item, itemCategory">
             <ListItemIcon className="itemIcon">
-              <HomeIcon />
+              <AccountCircleIcon />
             </ListItemIcon>
             <ListItemText
-              className= "primary : itemPrimary" >
-              Project Overview
+              className= {{primary : "itemPrimary"}} >
+              Profile
             </ListItemText>
-          </ListItem>
+          </ListItem> */}
+
+                <ListItem
+                  button
+                  className="item">
+                  <ListItemIcon className="itemIcon"> <AccountCircleIcon /> </ListItemIcon>
+                  <ListItemText
+                    className={{primary: "itemPrimary"}}>
+                    Profile
+                  </ListItemText>
+                </ListItem>
 
           {categories.map(({ id, children }) => (
             <React.Fragment key={id}>
 
               <ListItem className="categoryHeader">
                 <ListItemText
-                  className="primary: categoryHeaderPrimary">
+                  className={{primary: "categoryHeaderPrimary"}}>
                   {id}
                 </ListItemText>
               </ListItem>
 
-              {children.map(({ id: childId, icon, active }) => (
+              {children.map(({ id: childId, icon, active,link }) => (
                   
                 <ListItem
                   key={childId}
@@ -91,8 +98,11 @@ const SideBar = (props) => {
                   className="item">
                   <ListItemIcon className="itemIcon">{icon}</ListItemIcon>
                   <ListItemText
-                    className="primary: itemPrimary">
-                    {childId}
+                    className={{primary: "itemPrimary"}}>
+                      <Link style={{color:"black", textDecoration:"none"}} to={link}>
+                      {childId}
+                      </Link>
+                   
                   </ListItemText>
                 </ListItem>
               ))}
@@ -101,7 +111,10 @@ const SideBar = (props) => {
             </React.Fragment>
           ))}
         </List>
-      </Drawer>
+    
+        
+      </div>
+
     );
   }
 

@@ -1,4 +1,13 @@
-    .sidebar__logo {
+  .sidebar__main{
+    background-color:#eee;
+    position: fixed;
+    width: 200px;
+    height: 100%;
+    /* margin-top: -85px; */
+  }     
+    
+    
+    /* .sidebar__logo {
         height: 50px;
         width: 50px;
     }
@@ -36,6 +45,7 @@
 
 
     .firebase {
+    
       font-size: 24;
       color: white;
     }
@@ -56,4 +66,4 @@
 
     .divider {
       margin-top: 20px;
-    }
+    } */
