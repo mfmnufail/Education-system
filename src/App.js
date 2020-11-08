@@ -33,7 +33,7 @@ function App() {
             <Route path="/analysis" component={Analysis} />
             <Route path="/assesments" component={Assesments} />
             <Route path="/camarks" component={CaMarks} />
-            <Route path="/lolist" component={LoList} />
+            <Route path="/loslist" component={LoList} />
             <Route path="/poslist"  component={PoList} />
             <Route path="/normalize" component={Normalize} />
          

@@ -25,11 +25,11 @@ const useRowStyles = makeStyles({
   },
 });
 
-function createData(no, pocode, poname, description, moredetails) {
+function createData(no, locode, loname, description, moredetails) {
   return {
     no,
-    pocode,
-    poname,
+    locode,
+    loname,
     description,
     moredetails,
     history: [
@@ -55,8 +55,8 @@ function Row(props) {
         <TableCell component="th" scope="row">
           {row.no}
         </TableCell>
-        <TableCell align="right">{row.pocode}</TableCell>
-        <TableCell align="right">{row.poname}</TableCell>
+        <TableCell align="right">{row.locode}</TableCell>
+        <TableCell align="right">{row.loname}</TableCell>
         <TableCell align="right">{row.description}</TableCell>
         <TableCell align="right">{row.moredetails}</TableCell>
         <TableCell align="right"> <EditIcon/> </TableCell>
@@ -87,8 +87,8 @@ function Row(props) {
 
 Row.propTypes = {
   row: PropTypes.shape({
-    pocode: PropTypes.number.isRequired,
-    poname: PropTypes.number.isRequired,
+    locode: PropTypes.number.isRequired,
+    loname: PropTypes.number.isRequired,
     description: PropTypes.number.isRequired,
     moredetails: PropTypes.arrayOf(
       PropTypes.shape({
