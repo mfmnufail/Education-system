@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ObeSystem.Interfaces;
+using ObeSystem.Models;
 
 namespace ObeSystem.Controllers
 {
@@ -11,36 +13,57 @@ namespace ObeSystem.Controllers
     [ApiController]
     public class PolistController : ControllerBase
     {
+
+        private readonly IPolistRepository _polistRepository;
+
+        public PolistController(IPolistRepository polistRepository)
+        {
+            _polistRepository = polistRepository;
+        }
+
+
         // GET: api/Polist
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<ActionResult<IEnumerable<Polist>>> GetPolists()
         {
-            return new string[] { "value1", "value2" };
+            var polist = await _polistRepository.GetPolistAsync();
+            return Ok(polist);
+
         }
 
-        // GET: api/Polist/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
-        {
-            return "value";
-        }
 
-        // POST: api/Polist
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult<Polist> CreatePostAsync(Polist polist)
         {
+            Polist newpolist = _polistRepository.Add(polist);
+            return Ok(newpolist);
         }
 
-        // PUT: api/Polist/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+
+        [HttpPut("{id?}")]
+        public ActionResult<Polist> UpdatePolist(Polist polist)
         {
+            Polist polistchanges = _polistRepository.Update(polist);
+            return Ok(polistchanges);
         }
 
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+
+
+
+        //GET: api/Polist/5
+        [HttpGet("{id?}")]
+        public async Task<ActionResult<Polist>> GetPolist(int id)
         {
+            return await _polistRepository.GetPolistByIdAsync(id);
         }
+
+
+        public ActionResult<Polist> DeleteLo(int id)
+        {
+            Polist deletedlist = _polistRepository.Delete(id);
+            return Ok(deletedlist);
+        }
+
+
     }
 }
