@@ -16,6 +16,11 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import axios from 'axios';
+import {useEffect, useState} from 'react';
+import Button from '@material-ui/core/Button';
+
+
 
 const useRowStyles = makeStyles({
   root: {
@@ -39,85 +44,118 @@ function createData(no, pocode, poname, description, moredetails) {
   };
 }
 
-function Row(props) {
-  const { row } = props;
-  const [open, setOpen] = React.useState(false);
-  const classes = useRowStyles();
+// function Row(props) {
+//   const { row } = props;
+//   const [open, setOpen] = React.useState(false);
+//   const classes = useRowStyles();
 
-  return (
-    <React.Fragment>
-      <TableRow className={classes.root}>
-        <TableCell>
-          <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
-        </TableCell>
-        <TableCell component="th" scope="row">
-          {row.no}
-        </TableCell>
-        <TableCell align="right">{row.pocode}</TableCell>
-        <TableCell align="right">{row.poname}</TableCell>
-        <TableCell align="right">{row.description}</TableCell>
-        <TableCell align="right">{row.moredetails}</TableCell>
-        <TableCell align="right"> <EditIcon/> </TableCell>
-        <TableCell align="right"><DeleteIcon/></TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box margin={1}>
-              <Typography variant="h6" gutterBottom component="div">
-                Description
-              </Typography>
-              <Table size="small" aria-label="purchases">
-                <TableHead>
-                  <TableRow>
-                        <TableCell>The description part goes here...</TableCell>
-                   </TableRow>
+//   return (
+//     <React.Fragment>
+//       <TableRow className={classes.root}>
+//         <TableCell>
+//           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+//             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+//           </IconButton>
+//         </TableCell>
+//         <TableCell component="th" scope="row">
+//           {row.no}
+//         </TableCell>
+//         <TableCell align="right">{row.pocode}</TableCell>
+//         <TableCell align="right">{row.poname}</TableCell>
+//         <TableCell align="right">{row.description}</TableCell>
+//         <TableCell align="right">{row.moredetails}</TableCell>
+//         <TableCell align="right"> <EditIcon/> </TableCell>
+//         <TableCell align="right"><DeleteIcon/></TableCell>
+//       </TableRow>
+//       <TableRow>
+//         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+//           <Collapse in={open} timeout="auto" unmountOnExit>
+//             <Box margin={1}>
+//               <Typography variant="h6" gutterBottom component="div">
+//                 Description
+//               </Typography>
+//               <Table size="small" aria-label="purchases">
+//                 <TableHead>
+//                   <TableRow>
+//                         <TableCell>The description part goes here...</TableCell>
+//                    </TableRow>
                
-                </TableHead>
-              </Table>
-            </Box>
-          </Collapse>
-        </TableCell>
-      </TableRow>
-    </React.Fragment>
-  );
-}
+//                 </TableHead>
+//               </Table>
+//             </Box>
+//           </Collapse>
+//         </TableCell>
+//       </TableRow>
+//     </React.Fragment>
+//   );
+// }
 
-Row.propTypes = {
-  row: PropTypes.shape({
-    pocode: PropTypes.number.isRequired,
-    poname: PropTypes.number.isRequired,
-    description: PropTypes.number.isRequired,
-    moredetails: PropTypes.arrayOf(
-      PropTypes.shape({
-        amount: PropTypes.number.isRequired,
-        customerId: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
-      }),
-    ).isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    protein: PropTypes.number.isRequired,
-  }).isRequired,
-};
+// Row.propTypes = {
+//   row: PropTypes.shape({
+//     pocode: PropTypes.number.isRequired,
+//     poname: PropTypes.number.isRequired,
+//     description: PropTypes.number.isRequired,
+//     moredetails: PropTypes.arrayOf(
+//       PropTypes.shape({
+//         amount: PropTypes.number.isRequired,
+//         customerId: PropTypes.string.isRequired,
+//         date: PropTypes.string.isRequired,
+//       }),
+//     ).isRequired,
+//     name: PropTypes.string.isRequired,
+//     price: PropTypes.number.isRequired,
+//     protein: PropTypes.number.isRequired,
+//   }).isRequired,
+// };
 
-const rows = [
-  createData(1, "LO", "LO", "Description", "Learning Outcome"),
-  createData(2, "LO", "LO", "Description", "Learning Outcome"),
-  createData(3, "LO", "LO", "Description", "Learning Outcome"),
-  createData(4, "LO", "LO", "Description", "Learning Outcome"),
-  createData(5, "LO", "LO", "Description", "Learning Outcome"),
-  createData(6, "LO", "LO", "Description", "Learning Outcome"),
-  createData(7, "LO", "LO", "Description", "Learning Outcome"),
+// const rows = [
+//   createData(1, "LO", "LO", "Description", "Learning Outcome"),
+//   createData(2, "LO", "LO", "Description", "Learning Outcome"),
+//   createData(3, "LO", "LO", "Description", "Learning Outcome"),
+//   createData(4, "LO", "LO", "Description", "Learning Outcome"),
+//   createData(5, "LO", "LO", "Description", "Learning Outcome"),
+//   createData(6, "LO", "LO", "Description", "Learning Outcome"),
+//   createData(7, "LO", "LO", "Description", "Learning Outcome"),
  
-];
+// ];
 
 function LoList() {
+
+  var [lolist, setLolist] = useState([]);
+
+  
+useEffect(() => {
+  
+  axios.get('https://localhost:44333/api/Lolist')
+  .then((response) => 
+  {
+    console.log(response);
+    setLolist(response.data);
+    console.log(response.data)
+  }
+  
+  )
+  
+
+}, [])
+
+  
+
+
   return (
     <TableContainer component={Paper}>
-         <h3 style={{textAlign:"center"}}>LEARNING OUTCOME LIST</h3>
+      <div style={{display:"flex"}}  >
+      <h3 style={{textAlign:"center", flex:1}}>LEARNING OUTCOME LIST</h3>
+      
+      <div style={{flex:0.1}}>
+      <Button href="./definelo" variant="contained" color="primary">  Define LO</Button>
+
+      </div>
+
+      
+      </div>
+         
+         
       <Table aria-label="collapsible table">
          
         <TableHead >
@@ -127,14 +165,27 @@ function LoList() {
             <TableCell  style={{fontWeight:"bold", fontSize:"18px"}} align="right">LO Code</TableCell>
             <TableCell style={{fontWeight:"bold", fontSize:"18px"}}  align="right">LO Name</TableCell>
             <TableCell  style={{fontWeight:"bold", fontSize:"18px"}} align="right">Description</TableCell>
-            <TableCell style={{fontWeight:"bold", fontSize:"18px"}}  align="right">More Details</TableCell>
+            {/* <TableCell style={{fontWeight:"bold", fontSize:"18px"}}  align="right">More Details</TableCell> */}
             <TableCell style={{fontWeight:"bold", fontSize:"18px"}}  align="right">Edit</TableCell>
             <TableCell style={{fontWeight:"bold", fontSize:"18px"}}  align="right">Delete</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <Row key={row.name} row={row} />
+          {lolist.map((row) => (
+
+          <TableRow>
+          <TableCell  />
+          <TableCell    >{row.id}</TableCell>
+          <TableCell   align="right">{row.lo_name}</TableCell>
+          <TableCell  align="right">{row.lo_code}</TableCell>
+          <TableCell   align="right">{row.description}</TableCell>
+          {/* <TableCell  align="right">{row.lo_name}</TableCell> */}
+          <TableCell align="right" > <EditIcon/> </TableCell>
+          <TableCell align="right"><DeleteIcon/></TableCell>
+          </TableRow>
+
+            
+           
           ))}
         </TableBody>
       </Table>

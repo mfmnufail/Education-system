@@ -11,6 +11,7 @@ import CaMarks from './Components/Navigation/CaMarks/CaMarks'
 import LoList from './Components/Navigation/LoList/LoList'
 import Normalize from './Components/Navigation/Normalize/Normalize'
 import PoList from './Components/Navigation/PoList/PoList'
+import DefineLo from './Components/Define/DefineLo/DefineLo'
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
       <div className="App">
         <div className="app__home">
         <Header/>
+     
          <SideBar />
 
         </div>
@@ -36,6 +38,8 @@ function App() {
             <Route path="/loslist" component={LoList} />
             <Route path="/poslist"  component={PoList} />
             <Route path="/normalize" component={Normalize} />
+            <Route path="/definelo" component={DefineLo} />
+
          
        </Switch>
 

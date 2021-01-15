@@ -1,11 +1,14 @@
 import React from 'react'
+import './DefineLo.css'
 
 function DefineLo() {
     return (
+
         <div>
-            <h1>DefineLo goes here...</h1>
+            
         </div>
-    )
+       
+    );
 }
 
 export default DefineLo

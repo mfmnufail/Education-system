@@ -56,7 +56,7 @@ const SideBar = (props) => {
 
           <ListItem style={{marginBottom: "30px"}} className="firebase, item, itemCategory">
               <div className="sidebar__logo">
-                    <img style={{height:"150px", marginLeft:"25px"}} src="https://lh3.googleusercontent.com/proxy/pkhCWzB0-b_XB42uW2HnuVUygV3OEqK0rvQ9HLWK6eru2oAbqWyblIFCOti_WpnWLjt58NgZnEvATIbavjdwag" alt=""/>
+                    <img style={{height:"150px", marginLeft:"25px"}} src="./images/logo.png" alt=""/>
               </div>
           </ListItem>
 
@@ -114,6 +114,8 @@ const SideBar = (props) => {
     
         
       </div>
+
+      
 
     );
   }
