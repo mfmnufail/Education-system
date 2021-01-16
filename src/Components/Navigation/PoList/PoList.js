@@ -16,6 +16,9 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Button from '@material-ui/core/Button'
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const useRowStyles = makeStyles({
   root: {
@@ -58,7 +61,7 @@ function Row(props) {
         <TableCell align="right">{row.locode}</TableCell>
         <TableCell align="right">{row.loname}</TableCell>
         <TableCell align="right">{row.description}</TableCell>
-        <TableCell align="right">{row.moredetails}</TableCell>
+        {/* <TableCell align="right">{row.moredetails}</TableCell> */}
         <TableCell align="right"> <EditIcon/> </TableCell>
         <TableCell align="right"><DeleteIcon/></TableCell>
       </TableRow>
@@ -85,39 +88,67 @@ function Row(props) {
   );
 }
 
-Row.propTypes = {
-  row: PropTypes.shape({
-    locode: PropTypes.number.isRequired,
-    loname: PropTypes.number.isRequired,
-    description: PropTypes.number.isRequired,
-    moredetails: PropTypes.arrayOf(
-      PropTypes.shape({
-        amount: PropTypes.number.isRequired,
-        customerId: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
-      }),
-    ).isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    protein: PropTypes.number.isRequired,
-  }).isRequired,
-};
+// Row.propTypes = {
+//   row: PropTypes.shape({
+//     locode: PropTypes.number.isRequired,
+//     loname: PropTypes.number.isRequired,
+//     description: PropTypes.number.isRequired,
+//     moredetails: PropTypes.arrayOf(
+//       PropTypes.shape({
+//         amount: PropTypes.number.isRequired,
+//         customerId: PropTypes.string.isRequired,
+//         date: PropTypes.string.isRequired,
+//       }),
+//     ).isRequired,
+//     name: PropTypes.string.isRequired,
+//     price: PropTypes.number.isRequired,
+//     protein: PropTypes.number.isRequired,
+//   }).isRequired,
+// };
 
-const rows = [
-  createData(1, "PO", "PO", "Description", "Program Outcome"),
-  createData(2, "PO", "PO", "Description", "Program Outcome"),
-  createData(3, "PO", "PO", "Description", "Program Outcome"),
-  createData(4, "PO", "PO", "Description", "Program Outcome"),
-  createData(5, "PO", "PO", "Description", "Program Outcome"),
-  createData(6, "PO", "PO", "Description", "Program Outcome"),
-  createData(7, "PO", "PO", "Description", "Program Outcome"),
+// const rows = [
+//   createData(1, "PO", "PO", "Description", "Program Outcome"),
+//   createData(2, "PO", "PO", "Description", "Program Outcome"),
+//   createData(3, "PO", "PO", "Description", "Program Outcome"),
+//   createData(4, "PO", "PO", "Description", "Program Outcome"),
+//   createData(5, "PO", "PO", "Description", "Program Outcome"),
+//   createData(6, "PO", "PO", "Description", "Program Outcome"),
+//   createData(7, "PO", "PO", "Description", "Program Outcome"),
  
-];
+// ];
 
 export default function PoList() {
+
+  var [polist, setPolist] = useState([]);
+
+  
+useEffect(() => {
+  
+  axios.get('https://localhost:44333/api/Polist')
+  .then((response) => 
+  {
+    console.log(response);
+    setPolist(response.data);
+    console.log(response.data)
+  }
+  
+  )
+  
+
+}, [])
+
   return (
     <TableContainer component={Paper}>
-         <h3 style={{textAlign:"center"}}>PROGRAM OUTCOME LIST</h3>
+         <div style={{display:"flex"}}  >
+      <h3 style={{textAlign:"center", flex:1}}>PROGRAMME OUTCOME LIST</h3>
+      
+      <div style={{flex:0.1}}>
+      <Button href="./definepo" variant="contained" color="primary">  Define PO</Button>
+
+      </div>
+
+      
+      </div>
       <Table aria-label="collapsible table">
          
         <TableHead >
@@ -127,14 +158,27 @@ export default function PoList() {
             <TableCell  style={{fontWeight:"bold", fontSize:"18px"}} align="right">PO Code</TableCell>
             <TableCell style={{fontWeight:"bold", fontSize:"18px"}}  align="right">PO Name</TableCell>
             <TableCell  style={{fontWeight:"bold", fontSize:"18px"}} align="right">Description</TableCell>
-            <TableCell style={{fontWeight:"bold", fontSize:"18px"}}  align="right">More Details</TableCell>
+            <TableCell style={{fontWeight:"bold", fontSize:"18px"}}  align="right">Weight</TableCell>
             <TableCell style={{fontWeight:"bold", fontSize:"18px"}}  align="right">Edit</TableCell>
             <TableCell style={{fontWeight:"bold", fontSize:"18px"}}  align="right">Delete</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <Row key={row.name} row={row} />
+        {polist.map((row) => (
+
+              <TableRow>
+              <TableCell  />
+              <TableCell    >{row.id}</TableCell>
+              <TableCell   align="right">{row.po_name}</TableCell>
+              <TableCell  align="right">{row.po_code}</TableCell>
+              <TableCell   align="right">{row.description}</TableCell>
+              <TableCell  align="right">{row.weight}</TableCell>
+              <TableCell align="right" > <EditIcon/> </TableCell>
+              <TableCell align="right"><DeleteIcon/></TableCell>
+              </TableRow>
+
+            
+          
           ))}
         </TableBody>
       </Table>

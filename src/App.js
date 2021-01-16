@@ -12,6 +12,7 @@ import LoList from './Components/Navigation/LoList/LoList'
 import Normalize from './Components/Navigation/Normalize/Normalize'
 import PoList from './Components/Navigation/PoList/PoList'
 import DefineLo from './Components/Define/DefineLo/DefineLo'
+import DefinePo from './Components/Define/DefinePo/DefinePo'
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
             <Route path="/poslist"  component={PoList} />
             <Route path="/normalize" component={Normalize} />
             <Route path="/definelo" component={DefineLo} />
+            <Route path="/definepo" component={DefinePo} />
 
          
        </Switch>
