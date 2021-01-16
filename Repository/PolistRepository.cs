@@ -18,20 +18,30 @@ namespace ObeSystem.Repository
             _context = context;
         }
 
-
-
-        public Polist Add(Polist polist)
+        public async Task<IEnumerable<Models.Polist>> GetPolistAsync()
         {
-            polist.PolistId = _context.Polists.Max(x => x.PolistId) + 1;
+            return await _context.Polists.ToListAsync();
+        }
+
+        public async Task<Models.Polist> GetPolistByIdAsync(int id)
+        {
+            return await _context.Polists.FindAsync(id);
+        }
+
+
+
+        public Models.Polist Add(Polist polist)
+        {
+            //polist.PolistId = _context.Polists.Max(x => x.PolistId) + 1;
 
             _context.Polists.Add(polist);
             _context.SaveChanges();
             return polist;
         }
 
-        public Polist Delete(int id)
+        public Models.Polist Delete(int id)
         {
-            Polist polist = _context.Polists.FirstOrDefault(e => e.PolistId == id);
+            Polist polist = _context.Polists.FirstOrDefault(e => e.Id == id);
             if (polist != null)
             {
                 _context.Polists.Remove(polist);
@@ -41,19 +51,11 @@ namespace ObeSystem.Repository
             return (polist);
         }
 
-        public async Task<IEnumerable<Polist>> GetPolistAsync()
-        {
-            return await _context.Polists.ToListAsync();
-        }
+        
 
-        public async Task<Polist> GetPolistByIdAsync(int id)
+        public Models.Polist Update(Polist polistchanges)
         {
-            return await _context.Polists.FindAsync(id);
-        }
-
-        public Polist Update(Polist polistchanges)
-        {
-            Polist polist = _context.Polists.FirstOrDefault(e => e.PolistId == polistchanges.PolistId);
+            Polist polist = _context.Polists.FirstOrDefault(e => e.Id == polistchanges.Id);
             if (polist != null)
             {
                 //polist.PolistId = polistchanges.PolistId;

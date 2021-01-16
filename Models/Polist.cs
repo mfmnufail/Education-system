@@ -12,7 +12,7 @@ namespace ObeSystem.Models
     public class Polist
     {
         
-        public int PolistId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public string Po_name { get; set; }
@@ -26,9 +26,9 @@ namespace ObeSystem.Models
         [Required]
         public double Weight { get; set; }
 
-        public int LolistId { get; set; }
+       
 
-        public Lolist Lolist { get; set; }
+        //public Lolist Lolist { get; set; }
 
        
     }

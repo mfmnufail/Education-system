@@ -12,7 +12,7 @@ namespace ObeSystem.Models
     public class Lolist
     {
 
-        public int LolistId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public string Lo_name { get; set; }
