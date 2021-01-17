@@ -176,8 +176,8 @@ useEffect(() => {
           <TableRow>
           <TableCell  />
           <TableCell    >{row.id}</TableCell>
-          <TableCell   align="right">{row.lo_name}</TableCell>
-          <TableCell  align="right">{row.lo_code}</TableCell>
+          <TableCell   align="right">{row.lo_code}</TableCell>
+          <TableCell  align="right">{row.lo_name}</TableCell>
           <TableCell   align="right">{row.description}</TableCell>
           {/* <TableCell  align="right">{row.lo_name}</TableCell> */}
           <TableCell align="right" > <EditIcon/> </TableCell>
