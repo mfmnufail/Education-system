@@ -23,7 +23,7 @@ namespace ObeSystem.Controllers
 
         // GET: api/Lolist
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Polist>>> GetLolists()
+        public async Task<ActionResult<IEnumerable<Lolist>>> GetLolists()
         {
             var lolist = await _lolistRepository.GetLolistAsync();
             return Ok(lolist);
@@ -65,23 +65,6 @@ namespace ObeSystem.Controllers
 
 
 
-        //// POST: api/Lolist
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //}
-
-        //// PUT: api/Lolist/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
-
-        //// DELETE: api/ApiWithActions/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
     }
 }
 
