@@ -31,19 +31,23 @@ function DefinePo() {
   const [PoName, setPoName] = useState('')
   const [Description, setDescription] = useState('')
   const [weight, setWeight] = useState('');
+  //const [Lolists, setLolists] = useState('')
+  
+ 
 
 
   const handleSubmit = (event) => 
   {
+    
+
      event.preventDefault();
 
      const data = {
        Po_code : PoCode,
        Po_name : PoName,
        Description: Description,
-       Weight : weight
-       
-
+       Weight : parseFloat(weight)
+      
      }
      console.log(data);
 

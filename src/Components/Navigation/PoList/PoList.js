@@ -88,34 +88,7 @@ function Row(props) {
   );
 }
 
-// Row.propTypes = {
-//   row: PropTypes.shape({
-//     locode: PropTypes.number.isRequired,
-//     loname: PropTypes.number.isRequired,
-//     description: PropTypes.number.isRequired,
-//     moredetails: PropTypes.arrayOf(
-//       PropTypes.shape({
-//         amount: PropTypes.number.isRequired,
-//         customerId: PropTypes.string.isRequired,
-//         date: PropTypes.string.isRequired,
-//       }),
-//     ).isRequired,
-//     name: PropTypes.string.isRequired,
-//     price: PropTypes.number.isRequired,
-//     protein: PropTypes.number.isRequired,
-//   }).isRequired,
-// };
 
-// const rows = [
-//   createData(1, "PO", "PO", "Description", "Program Outcome"),
-//   createData(2, "PO", "PO", "Description", "Program Outcome"),
-//   createData(3, "PO", "PO", "Description", "Program Outcome"),
-//   createData(4, "PO", "PO", "Description", "Program Outcome"),
-//   createData(5, "PO", "PO", "Description", "Program Outcome"),
-//   createData(6, "PO", "PO", "Description", "Program Outcome"),
-//   createData(7, "PO", "PO", "Description", "Program Outcome"),
- 
-// ];
 
 export default function PoList() {
 
@@ -143,7 +116,7 @@ useEffect(() => {
       <h3 style={{textAlign:"center", flex:1}}>PROGRAMME OUTCOME LIST</h3>
       
       <div style={{flex:0.1}}>
-      <Button href="./definepo" variant="contained" color="primary">  Define PO</Button>
+      <Button href="/poslist/definepo" variant="contained" color="primary">  Define PO</Button>
 
       </div>
 
@@ -169,8 +142,8 @@ useEffect(() => {
               <TableRow>
               <TableCell  />
               <TableCell    >{row.id}</TableCell>
-              <TableCell   align="right">{row.po_name}</TableCell>
-              <TableCell  align="right">{row.po_code}</TableCell>
+              <TableCell   align="right">{row.po_code}</TableCell>
+              <TableCell  align="right">{row.po_name}</TableCell>
               <TableCell   align="right">{row.description}</TableCell>
               <TableCell  align="right">{row.weight}</TableCell>
               <TableCell align="right" > <EditIcon/> </TableCell>
