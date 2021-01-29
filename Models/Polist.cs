@@ -27,9 +27,6 @@ namespace ObeSystem.Models
         public double Weight { get; set; }
 
        
-
-        //public Lolist Lolist { get; set; }
-
        
     }
 }

@@ -41,40 +41,6 @@ namespace ObeSystem.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Lolists");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Study about 12 patterns",
-                            Lo_code = "LO1",
-                            Lo_name = "Patterns",
-                            Weight = 0.20000000000000001
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Study about architecture",
-                            Lo_code = "LO2",
-                            Lo_name = "Architecture",
-                            Weight = 0.20000000000000001
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Efficiency code writing",
-                            Lo_code = "LO3",
-                            Lo_name = "Clean-Code",
-                            Weight = 0.20000000000000001
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Description = "Final Project",
-                            Lo_code = "LO4",
-                            Lo_name = "Implementation",
-                            Weight = 0.20000000000000001
-                        });
                 });
 
             modelBuilder.Entity("ObeSystem.Models.Polist", b =>
@@ -106,40 +72,32 @@ namespace ObeSystem.Migrations
                     b.HasIndex("LolistId");
 
                     b.ToTable("Polists");
+                });
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Creating Resume",
-                            Po_code = "PO1",
-                            Po_name = "Assignement1",
-                            Weight = 0.5
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Project-Proposal",
-                            Po_code = "PO2",
-                            Po_name = "Project-Imp",
-                            Weight = 0.5
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Mid-Evaluation",
-                            Po_code = "PO3",
-                            Po_name = "Project-Viva",
-                            Weight = 0.5
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Description = "End-Semester",
-                            Po_code = "PO4",
-                            Po_name = "Final-Evaluation",
-                            Weight = 0.5
-                        });
+            modelBuilder.Entity("ObeSystem.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("ObeSystem.Models.Polist", b =>

@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using ObeSystem.Helpers;
 using ObeSystem.Interfaces;
 using ObeSystem.Repository;
 
@@ -33,9 +34,15 @@ namespace ObeSystem
 
             services.AddScoped<IPolistRepository, PolistRepository>();
 
+
             services.AddDbContext<AppDbContext>(options => options.UseMySql(Configuration.GetConnectionString("OBEConnection")));
 
             services.AddControllers();
+
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+
+            services.AddScoped<IUserService, UserService>();
+
 
             services.AddCors(opt =>
             {
@@ -44,6 +51,8 @@ namespace ObeSystem
                     policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
                 });
             });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,6 +70,8 @@ namespace ObeSystem
             app.UseAuthorization();
 
             app.UseCors("CorsPolicy");
+
+            app.UseMiddleware<JwtMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
