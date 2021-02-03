@@ -25,19 +25,23 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <div className="app__home">
-        <Header/>
-     
-         <SideBar />
 
+        <div className="app_login">
+        <Switch>
+          <Route path="/Login" component={Login} />
+          <Route path="/Signup" component={Signup} />
+        </Switch>
+        </div>
+    
+        <div className="app__home">
+          <Header/>
+          <SideBar />
         </div>
        
-         
-      
          <div className="app__component">
          <Switch>
-            <Route path="/Login" component={Login} />
-            <Route path="/Signup" component={Signup} />
+            {/* <Route path="/Login" component={Login} />
+            <Route path="/Signup" component={Signup} /> */}
             <Route path="/module" component={Module} />
             <Route path="/analysis" component={Analysis} />
             <Route path="/assesments" component={Assesments} />
